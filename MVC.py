@@ -6,22 +6,20 @@ class Model():
         print(f"numer {self.id} przygotowujemy twoje {self.danie}")
 
 class View():
-    def __init__(self, controller):
-        self.controller = controller
-        self.model = controller.model
-        
-    def podaj(self):
-        self.id = self.model.id
-        self.danie = self.model.danie
+    def podaj(self, danieId, danie):
+        self.id = danieId
+        self.danie = danie
         print(f'numer {self.id} proszę odebrać danie {self.danie}')
 
 class Controller():
     def zrub_danie(self, id = None, danie = None):
         self.model = Model(id,danie)
+        self.danie = self.model.danie
+        self.danieId = self.model.id
         self.model.pokaz_danie()
     def pokaz_danie(self):
-        self.view = View(self)
-        self.view.podaj()
+        self.view = View()
+        self.view.podaj(self.danieId, self.danie)
 
 
 con = Controller()
